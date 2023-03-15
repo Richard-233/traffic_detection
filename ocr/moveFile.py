@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jun  9 18:24:10 2021
-
-@author: luohenyueji
+Moving license plate of each province to one folder and Counting the number of each province
 """
+import shutil
 
 from PIL import Image, ImageDraw, ImageFont
-import os, shutil
+import os
 
 provincelist = [
     "皖", "沪", "津", "渝", "冀",
@@ -104,21 +103,19 @@ def move(path, numberdict):
     else:
         numberdict[provincelist[int(label[0])]] = 1
 
-    # 省份缩写
+    # 移动文件
     # if int(label[0]) != 0 and numberdict[provincelist[int(label[0])]]<=1500:
-    # if int(label[0]) == 0 and numberdict[provincelist[int(label[0])]]<=1026:
-    #     print(path)
+    # if int(label[0]) == 0 and numberdict[provincelist[int(label[0])]]<=3729:
     #     try:
-    #         shutil.move(path, r"D:\Users\Richard_Young\Desktop\data\blue")
+    #         shutil.move(path, r"D:\Users\Richard_Young\Desktop\final_design\data\green")
     #     except:
     #         os.remove(path)
     #         numberdict[provincelist[int(label[0])]] = numberdict[provincelist[int(label[0])]] - 1
     #     return 0
-
-    # else:
-    #     numberdict[provincelist[int(label[0])]] = 0
+    # elif numberdict[provincelist[int(label[0])]]>3729:
     #     return 1
 
+    # 省份缩写
     # province = provincelist[int(label[0])]
     # print(province)
     # 车牌信息
@@ -128,19 +125,20 @@ def move(path, numberdict):
 
     # --- 图片可视化
     # ImgShow(imgpath, box, points, label)
-    # return 0
+    return 0
 
 
 def main():
-    # file_path = r'D:\Users\Richard_Young\Desktop\数据集\CCPD2019'
-    file_path = r'D:\Users\Richard_Young\Desktop\data\blue'
+    # file_path = r'D:\Users\Richard_Young\Desktop\数据集\CCPD2020'
+    file_path = r'D:\Users\Richard_Young\Desktop\final_design\data\green'
     numberdict = dict()
     for root, dirs, files in os.walk(file_path):
         for file in files:
+            print(file)
             path = os.path.join(root, file)
             i = move(path, numberdict)
             if i == 1:
-                break
+                return
     print(numberdict)
 
 
